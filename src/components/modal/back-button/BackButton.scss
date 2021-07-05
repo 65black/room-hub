@@ -1,0 +1,15 @@
+.back-button {
+  // @include text-s;
+  align-items: center;
+  background: none;
+  border: 0;
+  color: $color-brand-blue50;
+  cursor: pointer;
+  display: flex;
+  outline: 0;
+  padding: $space-24;
+
+  &__chevron {
+    transform: rotate(90deg);
+  }
+}

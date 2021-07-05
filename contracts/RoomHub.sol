@@ -3,7 +3,7 @@ pragma solidity 0.5.13;
 contract RoomHub {
   address private owner;
 
-  struct Plant {
+  struct Room {
     string id;
     string name;
     string timestampAdded;
@@ -32,17 +32,16 @@ contract RoomHub {
     bytes32 s;
   }
 
-  mapping(string => Plant) plants;
+  mapping(string => Room) rooms;
   mapping(string => Log) public logs;
-  mapping(address => string) public devicesToPlants;
+  mapping(address => string) public devicesToRooms;
   mapping(string => string) logToPlants;
 
-  event PlantAdded(
+  event RoomAdded(
     string _id,
     string _name,
     string _timestampAdded
   );
-
   event LogReceived(
     string _id,
     string _temperature,
@@ -63,7 +62,7 @@ contract RoomHub {
     _;
   }
 
-  function addPlant(
+  function addRoom(
     string memory _id,
     string memory _name,
 
@@ -78,7 +77,7 @@ contract RoomHub {
 
     string memory _timestampAdded
   ) onlyOwner public {
-    require(plants[_id].isAdded == false, "This plant is already added");
+    require(rooms[_id].isAdded == false, "This room is already added");
 
     LogThreshold memory _threshold = LogThreshold(
       _temperatureUpper,
@@ -93,7 +92,7 @@ contract RoomHub {
 
     bool _isAdded = true;
 
-    Plant memory _plant = Plant(
+    Room memory _room = Room(
       _id,
       _name,
       _timestampAdded,
@@ -101,16 +100,16 @@ contract RoomHub {
       _threshold
     );
 
-    plants[_id] = _plant;
+    rooms[_id] = _room;
 
-    emit PlantAdded(_id, _name, _timestampAdded);
+    emit RoomAdded(_id, _name, _timestampAdded);
   }
 
-  function registerDeviceToPlant(
+  function registerDeviceToRoom(
     address _deviceAddress,
-    string memory _plantId
+    string memory _roomId
   ) onlyOwner public {
-    devicesToPlants[_deviceAddress] = _plantId;
+    devicesToRooms[_deviceAddress] = _roomId;
   }
 
   function receiveLog(

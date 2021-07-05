@@ -3,10 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { ModalContextProvider } from './state/contexts/modalContext';
+import { NotificationContextProvider } from './state/contexts/notificationContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <NotificationContextProvider>
+      <ModalContextProvider>
+        <App />
+      </ModalContextProvider>
+      </NotificationContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

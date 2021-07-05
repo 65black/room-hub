@@ -1,0 +1,39 @@
+.room-info {
+  grid-area: info;
+  text-align: left;
+  // width: 50%;
+
+  &__room-name,
+  &__status-summary {
+    font-family: 'Poppins';
+    font-weight: 300;
+    color: #0C3565;
+  }
+
+  &__summary {
+    align-items: center;
+    display: flex;
+
+    &-icon {
+      padding-left: 8px;
+    }
+  }
+
+  &__status {
+    align-items: center;
+    display: flex;
+    margin: 16px 0;
+
+    &-icon {
+      padding-right: 8px;
+    }
+
+    &-text {
+      margin: 0;
+    }
+  }
+
+  @media screen and (min-width: 1080px) {
+    width: 50%;
+  }
+}

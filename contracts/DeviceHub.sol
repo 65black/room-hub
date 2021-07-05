@@ -1,7 +1,7 @@
 pragma solidity 0.5.13;
 import './RoomHubInterface.sol';
 
-contract PebbleHub {
+contract DeviceHub {
   address private owner;
   address private room;
 
@@ -10,6 +10,7 @@ contract PebbleHub {
     bool isRegistered;
     bool isBlocked;
     string imei;
+    string name;
   }
 
   struct Log {
@@ -24,10 +25,26 @@ contract PebbleHub {
 
   mapping(address => Device) public devices;
 
-  event DeviceAdded(address _deviceAddress, string _imei);
-  event DeviceBlocked(address _deviceAddress, string _imei);
-  event DeviceUnblocked(address _deviceAddress, string _imei);
-  event DeviceVerified(address _deviceAddress, string _imei);
+  event DeviceAdded(
+    string _name,
+    string _imei,
+    address _deviceAddress
+  );
+  event DeviceBlocked(
+    string _name,
+    string _imei,
+    address _deviceAddress
+  );
+  event DeviceUnblocked(
+    string _name,
+    string _imei,
+    address _deviceAddress
+  );
+  event DeviceVerified(
+    string _name,
+    string _imei,
+    address _deviceAddress
+  );
   event LogReceived(
     string id,
     string temperature,
@@ -51,7 +68,8 @@ contract PebbleHub {
 
   function addDevice(
     address _deviceAddress,
-    string memory _imei
+    string memory _imei,
+    string memory _name
   ) public {
     require(devices[_deviceAddress].isRegistered != true, "This device is already registered");
     require(devices[_deviceAddress].isBlocked != true, "This device has been blacklisted");
@@ -63,12 +81,13 @@ contract PebbleHub {
       _deviceAddress,
       _isRegistered,
       _isBlocked,
-      _imei
+      _imei,
+      _name
     );
 
     devices[_deviceAddress] = _device;
 
-    emit DeviceAdded(_deviceAddress, _imei);
+    emit DeviceAdded(_name, _imei, _deviceAddress);
   }
 
   function blockDevice(
@@ -83,7 +102,7 @@ contract PebbleHub {
       _device.isRegistered = false;
     }
 
-    emit DeviceBlocked(_deviceAddress, _imei);
+    emit DeviceBlocked(_device.name, _imei, _deviceAddress);
   }
 
   function unblockDevice(
@@ -96,7 +115,7 @@ contract PebbleHub {
 
     _device.isBlocked = false;
 
-    emit DeviceUnblocked(_deviceAddress, _imei);
+    emit DeviceUnblocked(_device.name, _imei, _deviceAddress);
   }
 
   function verifyLog(
@@ -119,7 +138,7 @@ contract PebbleHub {
       Device memory _device = devices[_deviceAddress];
 
       if (_device.isRegistered == true) {
-        emit DeviceVerified(_deviceAddress, _device.imei);
+        emit DeviceVerified(_device.name, _device.imei, _deviceAddress);
 
         hit = true;
         break;

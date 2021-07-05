@@ -1,0 +1,48 @@
+$skeleton-color: #e4e4e4;
+
+@mixin skeleton($maxwidth, $height) {
+  background-color: $skeleton-color;
+  height: $height;
+  max-width: $maxwidth;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+
+  &::before {
+    animation: Skeleton-loader 700ms cubic-bezier(0.83, 0, 0.17, 1) infinite;
+    background: linear-gradient(90deg, $skeleton-color 0%, rgba($color-grey, 0.8) 25%, $skeleton-color 50%);
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    transform: translateX(-100%);
+    width: inherit;
+    will-change: transform;
+  }
+}
+
+@keyframes Skeleton-loader {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@mixin disabled {
+  filter: grayscale(100%);
+  opacity: 0.36;
+  pointer-events: none;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

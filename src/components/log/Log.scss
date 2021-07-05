@@ -1,0 +1,15 @@
+.log {
+  &__status {
+    align-items: center;
+    display: flex;
+    margin: 16px 0;
+
+    &-icon {
+      padding-right: 8px;
+    }
+
+    &-text {
+      margin: 0;
+    }
+  }
+}
