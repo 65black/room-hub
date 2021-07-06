@@ -1,0 +1,5 @@
+.empty-room {
+  &__heading {
+    @include heading;
+  }
+}

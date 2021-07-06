@@ -1,14 +1,19 @@
-$break-point-mobile: 940px;
-
 .header {
-  background: #EDF6F9;
+  background: $c-brand90;
   display: block;
-  margin: 32px auto;
-  padding: 16px 32px;
+  margin: $space-32 auto;
+  padding: $space-16 $space-32;
 
-  &__button {
+  &__link {
+    display: inline-block;
     background: transparent;
     border-style: none;
-    color: #0C3565;
+    color: $c-dark-brand;
+    text-decoration: none;
+    margin: 0 $space-8;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }

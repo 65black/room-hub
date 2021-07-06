@@ -1,5 +1,4 @@
-import React, { createContext, useContext, useMemo, useReducer } from 'react';
-import { arrayOf, node, oneOfType } from 'prop-types';
+import { createContext, useContext, useMemo, useReducer } from 'react';
 
 import dispatchLogger from '../../utilities/dispatchLogger';
 import { addNotificationAction, removeNotificationAction } from '../actions/notificationActions';
@@ -42,8 +41,4 @@ export const NotificationContextProvider = ({ children }) => {
 export const useNotificationContext = () => {
   const notificationContext = useContext(NotificationContext);
   return notificationContext;
-};
-
-NotificationContextProvider.propTypes = {
-  children: oneOfType([arrayOf(node), node]).isRequired,
 };

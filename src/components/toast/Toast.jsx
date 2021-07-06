@@ -1,13 +1,6 @@
-import React from 'react';
-import { arrayOf, shape, string, func, number, oneOfType } from 'prop-types';
-
 import NotificationsTick from '../../assets/icons/notifications_tick.svg';
 import './Toast.scss';
 
-/**
- * Toast component is used to show small notification popup, upon user activity.
- * @returns HTML
- */
 function Toast({ notifications, closeToaster, closeToasterText }) {
   const displayNotifications =
     notifications &&
@@ -36,22 +29,5 @@ function Toast({ notifications, closeToaster, closeToasterText }) {
 
   return <div className="toast">{displayNotifications}</div>;
 }
-
-const notificationPropTypes = {
-  id: oneOfType([number, string]).isRequired,
-  message: string.isRequired,
-};
-
-Toast.propTypes = {
-  notifications: arrayOf(shape(notificationPropTypes)),
-  closeToaster: func,
-  closeToasterText: string,
-};
-
-Toast.defaultProps = {
-  notifications: [],
-  closeToaster: () => {},
-  closeToasterText: '',
-};
 
 export default Toast;

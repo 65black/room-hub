@@ -1,12 +1,15 @@
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 import './App.scss';
 import Actions from './components/actions/Actions';
 
 import Container from './components/container/Container';
-import Dashboard from './components/dashboard/Dashboard';
+import Rooms from './pages/rooms/Rooms';
 // import PebbleHub from './artifacts/contracts/PebbleHub.sol/PebbleHub.json';
 // import { ethers } from 'ethers';
 
 import Header from './components/header/Header';
+import Room from './pages/room/Room';
 // import { useEffect } from 'react';
 
 // const pebbleHubAddress = '0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266';
@@ -32,9 +35,9 @@ function App() {
   //   })
   // }, [])
 
-  function requestAccount() {
-    // return window.ethereum.request({ method: 'eth_requestAccounts '})
-  }
+  // function requestAccount() {
+  //   return window.ethereum.request({ method: 'eth_requestAccounts '})
+  // }
 
   // async function fetchDevices() {
   //   if (typeof window.ethereum !== 'undefined') {
@@ -58,13 +61,24 @@ function App() {
   // }
 
   return (
-    <div className="App">
-      <Container>
-        <Header />
-        <Dashboard />
-        <Actions />
-      </Container>
-    </div>
+    <Router>
+      <div className="App">
+        <Container>
+          <Header />
+
+          <Switch>
+            <Route exact path="/">
+              <Rooms />
+            </Route>
+
+            <Route path="/rooms/:slug">
+              <Room />
+            </Route>
+          </Switch>
+          <Actions />
+        </Container>
+      </div>
+    </Router>
   );
 }
 

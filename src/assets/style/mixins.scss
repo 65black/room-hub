@@ -1,3 +1,26 @@
+@mixin heading {
+  font-weight: 400;
+}
+
+@mixin label {
+  color: $c-dark-brand;
+  display: block;
+  margin: $space-16 0;
+}
+
+@mixin input {
+  border-style: none;
+  border: 1px solid $c-grey;
+  border-radius: $radius-s;
+  color: $c-brand;
+  display: block;
+  font-size: 16px;
+  height: 40px;
+  line-height: 16px;
+  outline: none;
+  padding: 0 $space-16;
+}
+
 $skeleton-color: #e4e4e4;
 
 @mixin skeleton($maxwidth, $height) {

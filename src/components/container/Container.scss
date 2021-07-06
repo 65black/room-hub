@@ -1,10 +1,10 @@
 .container {
-  padding: 0 32px;
+  padding: 0 $space-16;
   width: 100%;
 
-  @media screen and (min-width: 1080px) {
+  @media screen and (min-width: $break-point-tablet) {
     margin: 0 auto;
-    max-width: 940px;
+    max-width: $width-desktop;
     padding: 0;
   }
 }

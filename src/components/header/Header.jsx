@@ -1,14 +1,18 @@
-import React from 'react'
+import { NavLink } from 'react-router-dom';
 
-import './Header.scss'
+import './Header.scss';
 
 function Header() {
   return (
     <header className="header">
-      <button className="header__button" type="button">Home</button>
-      <button className="header__button" type="button">Logs</button>
+      <NavLink className="header__link" to="/">
+        Home
+      </NavLink>
+      <NavLink className="header__link" to="/logs">
+        Logs
+      </NavLink>
     </header>
-  )
+  );
 }
 
-export default Header
+export default Header;

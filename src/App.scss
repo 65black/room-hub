@@ -16,5 +16,9 @@ svg {
   box-sizing: content-box;
 }
 
+.overflow-hidden {
+  overflow: hidden;
+}
+
 @media (prefers-reduced-motion: no-preference) {
 }

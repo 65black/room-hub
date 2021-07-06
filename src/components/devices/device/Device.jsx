@@ -1,8 +1,8 @@
-import React from 'react'
+import Button from '../../button/Button';
 
-import './Device.scss'
+import './Device.scss';
 
-function Device({ name, imei, address }) {
+function Device({ name, imei }) {
   return (
     <div className="device">
       <div className="device__info">
@@ -10,9 +10,9 @@ function Device({ name, imei, address }) {
         <p className="device__imei">{imei}</p>
       </div>
 
-      <button className="device__copy-address" type="button">copy address</button>
+      <Button text="Copy address" isLink />
     </div>
-  )
+  );
 }
 
-export default Device
+export default Device;

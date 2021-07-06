@@ -1,0 +1,23 @@
+.rooms {
+  &__heading {
+    @include heading;
+  }
+
+  &__item {
+    background: transparent;
+    border-style: none;
+    border-radius: $radius-s;
+    cursor: pointer;
+    color: $c-dark-brand;
+    display: block;
+    margin: $space-16 0;
+    max-width: 300px;
+    padding: $space-8;
+    text-decoration: none;
+    width: 100%;
+
+    &:hover {
+      background: $c-brand90;
+    }
+  }
+}

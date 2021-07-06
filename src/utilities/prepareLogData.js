@@ -1,42 +1,37 @@
 function prepareLogData(logs) {
-  const formattedLogs = {}
+  const formattedLogs = {};
   const sortedAndTimedLogs = logs
     .sort((logA, logB) => logA.timestamp - logB.timestamp)
     .map((log) => ({
       ...log,
       time: `${new Date(log.timestamp).toLocaleTimeString(navigator.language, {
         hour: '2-digit',
-        minute:'2-digit'
-    })} pm`
-  }))
+        minute: '2-digit',
+      })} pm`,
+    }));
 
-  sortedAndTimedLogs.forEach(({
-    temperature,
-    pressure,
-    humidity,
-    time
-  }) => {
+  sortedAndTimedLogs.forEach(({ temperature, pressure, humidity, time }) => {
     Object.entries({
       temperature,
       pressure,
-      humidity
+      humidity,
     }).forEach((entry) => {
-      const [id, value] = entry
+      const [id, value] = entry;
       const formattedLog = {
         [id]: value,
         unit: id === 'temperature' ? '°C' : id === 'pressure' ? 'mmHg' : '%',
-        time
-      }
+        time,
+      };
 
       if (formattedLogs[id]) {
-        formattedLogs[id].push(formattedLog)
+        formattedLogs[id].push(formattedLog);
       } else {
-        formattedLogs[id] = [formattedLog]
+        formattedLogs[id] = [formattedLog];
       }
-    })
-  })
+    });
+  });
 
-  return formattedLogs
+  return formattedLogs;
 }
 
-export default prepareLogData
+export default prepareLogData;

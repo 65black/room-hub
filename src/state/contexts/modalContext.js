@@ -1,7 +1,6 @@
-import React, { createContext, useReducer, useContext, useMemo, useEffect } from 'react';
-import { arrayOf, oneOfType, node } from 'prop-types';
+import { createContext, useReducer, useContext, useMemo, useEffect } from 'react';
 
-import { modalReducer } from '../reducers/modalReducer';
+import modalReducer from '../reducers/modalReducer';
 import { showModalAction, hideModalAction } from '../actions/modalActions';
 
 import dispatchLogger from '../../utilities/dispatchLogger';
@@ -58,8 +57,4 @@ export function ModalContextProvider({ children }) {
 export const useModalContext = () => {
   const context = useContext(ModalContext);
   return context;
-};
-
-ModalContextProvider.propTypes = {
-  children: oneOfType([arrayOf(node), node]).isRequired,
 };

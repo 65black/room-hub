@@ -1,0 +1,33 @@
+.add-device {
+  display: flex;
+  flex-direction: column;
+  margin-top: $space-16;
+  width: 100%;
+
+  &__heading {
+    @include heading;
+  }
+
+  &__input {
+    @include input;
+    margin-top: $space-4;
+    width: 100%;
+  }
+
+  &__label {
+    @include label;
+  }
+
+  &__button {
+    margin-top: $space-32;
+  }
+
+  @media screen and (min-width: $break-point-tablet) {
+    max-width: 400px;
+    margin: auto;
+
+    &__input {
+      max-width: 350px;
+    }
+  }
+}

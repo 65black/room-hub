@@ -2,7 +2,7 @@
   align-items: center;
   display: flex;
   justify-content: space-between;
-  margin: 24px 0;
+  margin: $space-24 0;
 
   &__name,
   &__imei {
@@ -12,13 +12,5 @@
   &__imei {
     font-size: 14px;
     opacity: 0.45;
-  }
-
-
-  &__copy-address {
-    background: transparent;
-    border-style: none;
-    height: 100%;
-    padding: 4px 8px;
   }
 }

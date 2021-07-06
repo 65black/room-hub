@@ -1,0 +1,36 @@
+.add-room {
+  margin-bottom: $space-16;
+
+  &__heading {
+    @include heading;
+  }
+
+  &__threshold-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: $space-16;
+  }
+
+  &__input {
+    @include input;
+    margin-top: $space-4;
+    width: 100%;
+  }
+
+  label {
+    color: $c-dark-brand;
+    display: block;
+    margin: $space-16 0;
+  }
+
+  @media screen and (min-width: $break-point-tablet) {
+    &__threshold-container {
+      flex-direction: row;
+    }
+
+    input {
+      max-width: 250px;
+    }
+  }
+}

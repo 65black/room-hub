@@ -9,16 +9,14 @@
   &__heading {
     flex-grow: 1;
     text-transform: capitalize;
-    width:
-    100%;
+    width: 100%;
   }
 
   &__limit-id {
     text-transform: capitalize;
   }
 
-  @media screen and (min-width: 1080px) {
+  @media screen and (min-width: $break-point-tablet) {
     flex-basis: 350px;
-    // max-width: 390px;
   }
 }

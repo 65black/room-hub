@@ -2,10 +2,10 @@
   &__status {
     align-items: center;
     display: flex;
-    margin: 16px 0;
+    margin: $space-16 0;
 
     &-icon {
-      padding-right: 8px;
+      padding-right: $space-8;
     }
 
     &-text {

@@ -22,7 +22,7 @@ export default function useIsDesktop() {
   useEffect(() => {
     const onWindowResize = debounce(
       () => setIsDesktop(window.matchMedia(DESKTOP_BREAK_POINT).matches),
-      300
+      300,
     );
     window.addEventListener('resize', onWindowResize);
     return () => window.removeEventListener('resize', onWindowResize);

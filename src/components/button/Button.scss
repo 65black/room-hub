@@ -1,0 +1,31 @@
+.button {
+  background: transparent;
+  border-style: none;
+  border: 1px solid $c-brand;
+  border-radius: $radius-s;
+  cursor: pointer;
+  display: block;
+  min-width: 100px;
+  padding: $space-8;
+
+  &:hover {
+    background: $c-brand;
+    color: $c-white;
+  }
+
+  &--primary {
+    background: $c-brand;
+    color: $c-white;
+
+    &:hover {
+      background: transparent;
+      border: 1px solid $c-brand;
+      color: $c-brand;
+    }
+  }
+
+  &--link {
+    border: none;
+    min-width: fit-content;
+  }
+}

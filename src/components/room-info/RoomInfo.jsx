@@ -1,9 +1,7 @@
-import React from 'react'
+import Log from '../log/Log';
 
-import Log from '../log/Log'
-import { ReactComponent as CheckmarkIcon } from '../../assets/icons/checkmark_icon.svg'
-
-import './RoomInfo.scss'
+import { ReactComponent as CheckmarkIcon } from '../../assets/icons/checkmark_icon.svg';
+import './RoomInfo.scss';
 
 function RoomInfo({ room, latestLog }) {
   const summary = (
@@ -11,14 +9,14 @@ function RoomInfo({ room, latestLog }) {
       Room conditions are ok
       <CheckmarkIcon className="room-info__summary-icon" />
     </span>
-  )
-  const readableTimestamp = new Date(latestLog.timestamp).toDateString()
+  );
+  const readableTimestamp = new Date(latestLog.timestamp).toDateString();
 
   const logDetailsToRender = {
     temperature: latestLog.temperature,
     pressure: latestLog.pressure,
-    humidity: latestLog.humidity
-  }
+    humidity: latestLog.humidity,
+  };
 
   return (
     <section className="room-info">
@@ -31,7 +29,7 @@ function RoomInfo({ room, latestLog }) {
         <Log logs={logDetailsToRender} />
       </div>
     </section>
-  )
+  );
 }
 
-export default RoomInfo
+export default RoomInfo;

@@ -1,0 +1,24 @@
+.no-room {
+  text-align: center;
+
+  &__heading {
+    font-weight: 400;
+  }
+
+  &__add-room {
+    background: transparent;
+    border-style: none;
+    border: 1px solid $c-brand;
+    border-radius: $radius-s;
+    cursor: pointer;
+    display: block;
+    margin: $space-16 auto;
+    min-width: 300px;
+    padding: $space-8;
+
+    &:hover {
+      background: $c-brand;
+      color: $c-white;
+    }
+  }
+}

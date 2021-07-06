@@ -1,12 +1,12 @@
 .card {
-  background: #FFFFFF;
-  border-radius: 12px;
-  box-shadow: 0px 2px 4px 1px #EDF6F9;
+  background: $c-white;
+  border-radius: $radius-l;
+  box-shadow: 0px 2px 4px 1px $c-brand90;
   min-height: 250px;
-  padding: 16px;
+  padding: $space-16 $space-32;
   width: 100%;
 
-  @media screen and (min-width: 1080px) {
-    max-width: 386px;
+  @media screen and (min-width: $break-point-tablet) {
+    max-width: 380px;
   }
 }

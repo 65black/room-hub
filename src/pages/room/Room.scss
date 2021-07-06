@@ -1,0 +1,25 @@
+.room {
+  display: flex;
+  flex-direction: column;
+  gap: $space-32;
+  padding-bottom: $space-32;
+  justify-content: space-between;
+
+  @media screen and (min-width: $break-point-tablet) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 0.7fr 1.3fr;
+    grid-template-areas:
+      "info info . threshold"
+      "temperature temperature temperature devices"
+      "humidity humidity pressure pressure"
+    ;
+
+    .card {
+      max-width: 100%;
+    }
+
+    .card:not(.configured-threshold) {
+      height: 400px;
+    }
+  }
+}

@@ -1,13 +1,12 @@
 .room-info {
   grid-area: info;
   text-align: left;
-  // width: 50%;
 
   &__room-name,
   &__status-summary {
     font-family: 'Poppins';
     font-weight: 300;
-    color: #0C3565;
+    color: $c-dark-brand;
   }
 
   &__summary {
@@ -15,17 +14,17 @@
     display: flex;
 
     &-icon {
-      padding-left: 8px;
+      padding-left: $space-8;
     }
   }
 
   &__status {
     align-items: center;
     display: flex;
-    margin: 16px 0;
+    margin: $space-16 0;
 
     &-icon {
-      padding-right: 8px;
+      padding-right: $space-8;
     }
 
     &-text {
@@ -33,7 +32,7 @@
     }
   }
 
-  @media screen and (min-width: 1080px) {
+  @media screen and (min-width: $break-point-tablet) {
     width: 50%;
   }
 }

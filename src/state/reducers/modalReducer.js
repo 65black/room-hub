@@ -1,6 +1,6 @@
 import { SHOW_MODAL, HIDE_MODAL } from '../actions/types';
 
-export const modalReducer = (_, action) => {
+function modalReducer(_, action) {
   switch (action.type) {
     case SHOW_MODAL: {
       return {
@@ -19,4 +19,6 @@ export const modalReducer = (_, action) => {
     default:
       throw new Error('Not a valid modal context operation');
   }
-};
+}
+
+export default modalReducer;

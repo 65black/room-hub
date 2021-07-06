@@ -17,7 +17,7 @@ $toast-max-width: 90%;
   &__box {
     align-items: center;
     animation: slide-right 0.2s $ease both;
-    background: $color-grey;
+    background: $c-grey;
     border-radius: $radius-m;
     box-shadow: $shadow-s;
     display: flex;
@@ -29,16 +29,14 @@ $toast-max-width: 90%;
   }
 
   &__message {
-    // @include text-xs;
-    color: $color-white;
+    color: $c-white;
     display: flex;
     flex: 1;
     flex-direction: row;
   }
 
   &__text {
-    // @include text-xs;
-    color: $color-white;
+    color: $c-white;
     display: flex;
     margin-right: $space-16;
   }
@@ -54,18 +52,16 @@ $toast-max-width: 90%;
   }
 
   &__close-text {
-    // @include text-xs;
     background: none;
     border: 0;
-    color: $color-white;
+    color: $c-white;
     cursor: pointer;
-    // font-weight: $font-weight-bold;
     margin-left: $space-16;
     outline: 0;
   }
 
   &__splitter {
-    border: 1px solid $color-grey90;
+    border: 1px solid $c-grey90;
     height: 34px;
   }
 }

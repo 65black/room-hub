@@ -1,6 +1,8 @@
 .log-chart {
   flex-shrink: 1;
+  height: 400px;
   max-width: 100%;
+  padding: $space-16 $space-4;
   text-align: center;
   width: 100%;
 
@@ -17,11 +19,9 @@
   }
 
   &__text {
-    margin-top: 32px;
+    margin-top: $space-32;
   }
 
   @media screen and (min-width: 1080px) {
-    height: 400px;
-    // max-width: 500px;
   }
 }

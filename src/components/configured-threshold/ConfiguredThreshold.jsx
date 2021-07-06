@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-import Card from '../card/Card'
-import Log from '../log/Log'
+import Card from '../card/Card';
+import Log from '../log/Log';
 
-import './ConfiguredThreshold.scss'
+import './ConfiguredThreshold.scss';
 
 function ConfiguredThreshold({ threshold }) {
   const renderThresholdLimits = Object.entries(threshold).map(([limitId, limit]) => {
@@ -12,8 +12,8 @@ function ConfiguredThreshold({ threshold }) {
         <p className="configured-threshold__limit-id">{limitId} limit</p>
         <Log logs={limit} />
       </div>
-    )
-  })
+    );
+  });
 
   return (
     <Card extraClassNames="configured-threshold">
@@ -21,7 +21,7 @@ function ConfiguredThreshold({ threshold }) {
 
       {renderThresholdLimits}
     </Card>
-  )
+  );
 }
 
-export default ConfiguredThreshold
+export default ConfiguredThreshold;
