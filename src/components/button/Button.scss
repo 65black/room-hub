@@ -9,7 +9,7 @@
   padding: $space-8;
 
   &:hover {
-    background: $c-brand;
+    background: $c-secondary;
     color: $c-white;
   }
 
@@ -18,9 +18,9 @@
     color: $c-white;
 
     &:hover {
-      background: transparent;
-      border: 1px solid $c-brand;
-      color: $c-brand;
+      border-color: $c-secondary;
+      background: $c-secondary;
+      color: $c-white;
     }
   }
 

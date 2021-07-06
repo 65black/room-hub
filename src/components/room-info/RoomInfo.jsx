@@ -1,9 +1,13 @@
+import { Link, useParams } from 'react-router-dom';
+
 import Log from '../log/Log';
 
 import { ReactComponent as CheckmarkIcon } from '../../assets/icons/checkmark_icon.svg';
 import './RoomInfo.scss';
 
 function RoomInfo({ room, latestLog }) {
+  const { roomId } = useParams();
+
   const summary = (
     <span className="room-info__summary">
       Room conditions are ok
@@ -28,6 +32,10 @@ function RoomInfo({ room, latestLog }) {
       <div className="room-info__status-container">
         <Log logs={logDetailsToRender} />
       </div>
+
+      <Link className="room-info__all-logs" to={encodeURI(`/${roomId}/logs`)}>
+        All Logs
+      </Link>
     </section>
   );
 }

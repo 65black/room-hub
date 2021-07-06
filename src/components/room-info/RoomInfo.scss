@@ -32,6 +32,25 @@
     }
   }
 
+  &__all-logs {
+    background: $c-brand;
+    border-style: none;
+    border: 1px solid $c-brand;
+    border-radius: $radius-s;
+    color: $c-white;
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+    width: fit-content;
+    padding: $space-8 $space-16;
+
+    &:hover {
+      border-color: $c-secondary;
+      background: $c-secondary;
+      color: $c-white;
+    }
+  }
+
   @media screen and (min-width: $break-point-tablet) {
     width: 50%;
   }

@@ -1,6 +1,4 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
-import './App.scss';
 import Actions from './components/actions/Actions';
 
 import Container from './components/container/Container';
@@ -8,9 +6,10 @@ import Rooms from './pages/rooms/Rooms';
 // import PebbleHub from './artifacts/contracts/PebbleHub.sol/PebbleHub.json';
 // import { ethers } from 'ethers';
 
-import Header from './components/header/Header';
+import Breadcrumbs from './components/breadcrumbs/Breadcrumbs';
 import Room from './pages/room/Room';
 // import { useEffect } from 'react';
+import './App.scss';
 
 // const pebbleHubAddress = '0xf39fd6e51aad88f6f4ce6ab8827279cfffb92266';
 
@@ -64,14 +63,14 @@ function App() {
     <Router>
       <div className="App">
         <Container>
-          <Header />
+          <Breadcrumbs />
 
           <Switch>
             <Route exact path="/">
               <Rooms />
             </Route>
 
-            <Route path="/rooms/:slug">
+            <Route path="/:roomId">
               <Room />
             </Route>
           </Switch>

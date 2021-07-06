@@ -23,7 +23,7 @@ function Rooms() {
 
   const renderedRooms = rooms.map((room) => {
     return (
-      <Link key={room.id} className="rooms__item" to={`rooms/${room.id}`}>
+      <Link key={room.id} className="rooms__item" to={`/${room.id}`}>
         {room.name}
       </Link>
     );

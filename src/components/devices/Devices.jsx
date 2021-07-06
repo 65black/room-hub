@@ -26,7 +26,12 @@ function Devices({ devices }) {
     <Card extraClassNames="devices">
       <div className="devices__header">
         <p className="devices__heading">Your Devices</p>
-        <Button text="Add new device" handleClick={handleAddDevice} isPrimary />
+        <Button
+          text="Add new device"
+          extraClassNames="devices__add-address"
+          handleClick={handleAddDevice}
+          isPrimary
+        />
       </div>
 
       <div className="devices__items">{renderDevices}</div>

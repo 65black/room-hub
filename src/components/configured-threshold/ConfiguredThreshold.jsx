@@ -17,7 +17,7 @@ function ConfiguredThreshold({ threshold }) {
 
   return (
     <Card extraClassNames="configured-threshold">
-      <p className="configured-threshold__heading">Danger levels</p>
+      <p className="configured-threshold__heading">Threshold levels</p>
 
       {renderThresholdLimits}
     </Card>

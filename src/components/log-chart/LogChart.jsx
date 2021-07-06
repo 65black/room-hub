@@ -19,8 +19,12 @@ function LogChart({ name, log, color, yAxisUnit, thresholds }) {
     <Card extraClassNames={`log-chart log-chart__${name}`}>
       <ResponsiveContainer>
         <LineChart data={log} margin={{ left: name === 'pressure' ? 20 : 0 }}>
-          <XAxis dataKey="time" fontSize={12} />
-          <YAxis unit={yAxisUnit} fontSize={12} />
+          <XAxis dataKey="time" fontSize={12} tick={{ stroke: '#b8b8b8', strokeWidth: 1 }} />
+          <YAxis
+            unit={yAxisUnit}
+            fontSize={12}
+            tick={{ stroke: '#b8b8b8', strokeWidth: 1, fontWeight: 100 }}
+          />
           <Tooltip content={CustomChartTooltip} />
           <Legend />
 

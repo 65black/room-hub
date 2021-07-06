@@ -1,0 +1,26 @@
+.breadcrumbs {
+  border-bottom: 1px solid $c-grey90;
+  padding: $space-16 0;
+  margin-bottom: $space-16;
+
+  &__link {
+    color: $c-brand;
+    display: inline-block;
+    padding: $space-4 $space-16;;
+    text-decoration: none;
+
+    &[data-iscurrent=true] {
+      color: $c-secondary;
+    }
+
+    &::after {
+      content: '>';
+      display: inline-block;
+      padding-left: $space-8;
+    }
+
+    &:last-of-type::after {
+      display: none;
+    }
+  }
+}

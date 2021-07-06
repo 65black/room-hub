@@ -10,7 +10,7 @@ function Device({ name, imei }) {
         <p className="device__imei">{imei}</p>
       </div>
 
-      <Button text="Copy address" isLink />
+      <Button text="Copy address" extraClassNames="device__copy-address" isLink />
     </div>
   );
 }

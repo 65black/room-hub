@@ -1,4 +1,6 @@
 .devices {
+  background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
+  color: $c-white;
   grid-area: devices;
   height: fit-content;
 
@@ -6,5 +8,14 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
+  }
+
+  &__add-address {
+    background: $c-white;
+    color: $c-dark-brand;
+
+    &:hover {
+      color: $c-white;
+    }
   }
 }

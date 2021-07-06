@@ -12,7 +12,7 @@ ReactDOM.render(
       <ModalContextProvider>
         <App />
       </ModalContextProvider>
-      </NotificationContextProvider>
+    </NotificationContextProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
