@@ -27,6 +27,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "deploy-contract:local": "npx hardhat run scripts/deploy-contracts.js --network localhost",
     "start-blockchain": "npx hardhat node",
     "start-all": "npm run start & npm run start-blockchain"
   },

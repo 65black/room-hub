@@ -1,4 +1,4 @@
-import React from 'react';
+import { useParams } from 'react-router-dom';
 
 import AddDevice from '../../forms/add-device/AddDevice';
 import Device from './device/Device';
@@ -9,18 +9,24 @@ import { useModalContext } from '../../state/contexts/modalContext';
 import './Devices.scss';
 import Button from '../button/Button';
 
-function Devices({ devices }) {
-  const { showModal } = useModalContext();
+function Devices({ devices, fetchRoomData }) {
+  const { roomId } = useParams();
+  const { showModal, hideModal } = useModalContext();
 
   const handleAddDevice = () => {
-    showModal(<AddDevice />);
+    const onSuccess = () => {
+      hideModal();
+      fetchRoomData();
+    };
+
+    showModal(<AddDevice roomId={roomId} onSuccess={onSuccess} />);
   };
 
-  if (!devices.length) {
-    return <Button text="Add a device" handleClick={handleAddDevice} isPrimary />;
-  }
-
-  const renderDevices = devices.map((device) => <Device key={device.imei} {...device} />);
+  const renderDevices = devices.length ? (
+    devices.map((device) => <Device key={device.imei} {...device} />)
+  ) : (
+    <p className="devices__no-devices">No devices found</p>
+  );
 
   return (
     <Card extraClassNames="devices">

@@ -4,6 +4,12 @@
   grid-area: devices;
   height: fit-content;
 
+  &__no-devices {
+    display: block;
+    margin-top: $space-72;
+    text-align: center;
+  }
+
   &__header {
     align-items: center;
     display: flex;

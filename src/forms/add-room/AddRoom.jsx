@@ -1,9 +1,28 @@
+import { useState } from 'react';
 import Button from '../../components/button/Button';
+import { useAuth } from '../../components/route-guards/RouteGuards';
 import './AddRoom.scss';
 
-function AddRoom() {
+function AddRoom({ onSuccess }) {
+  const [roomName, setRoomName] = useState('');
+
+  const { contract } = useAuth();
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    const roomId = roomName.toLowerCase().split(' ').join('-');
+    const timeStampAdded = new Date().toUTCString();
+
+    const transaction = await contract.addRoom(roomId, roomName, timeStampAdded);
+    await transaction.wait();
+
+    setTimeout(() => {
+      onSuccess();
+    }, 1000);
+  };
+
   return (
-    <form className="add-room">
+    <form className="add-room" onSubmit={handleSubmit}>
       <h2 className="add-room__heading">Setup a new room with desired condition thresholds</h2>
 
       <label htmlFor="name-input">
@@ -13,70 +32,10 @@ function AddRoom() {
           id="name-input"
           className="add-room__input"
           placeholder="e.g Mauna Kea"
+          value={roomName}
+          onChange={(event) => setRoomName(event.target.value)}
         />
       </label>
-
-      <div className="add-room__threshold-container">
-        <div className="add-room__threshold-lower">
-          <label htmlFor="lower-temperature">
-            Lower temperature threshold (in Celsius)
-            <input
-              type="text"
-              id="lower-temperature"
-              className="add-room__input"
-              placeholder="e.g 15"
-            />
-          </label>
-          <label htmlFor="lower-humidity">
-            Lower humidity threshold (in percentage)
-            <input
-              type="text"
-              id="lower-humidity"
-              className="add-room__input"
-              placeholder="e.g 20"
-            />
-          </label>
-          <label htmlFor="lower-pressure">
-            Lower pressure threshold (in mmHg)
-            <input
-              type="text"
-              id="lower-pressure"
-              className="add-room__input"
-              placeholder="e.g 125"
-            />
-          </label>
-        </div>
-
-        <div className="add-room__threshold-higher">
-          <label htmlFor="higher-temperature">
-            Higher temperature threshold (in Celsius)
-            <input
-              type="text"
-              id="higher-temperature"
-              className="add-room__input"
-              placeholder="e.g 35"
-            />
-          </label>
-          <label htmlFor="higher-humidity">
-            Higher humidity threshold (in percentage)
-            <input
-              type="text"
-              id="higher-humidity"
-              className="add-room__input"
-              placeholder="e.g 70"
-            />
-          </label>
-          <label htmlFor="higher-pressure">
-            Higher pressure threshold (in mmHg)
-            <input
-              type="text"
-              id="higher-pressure"
-              className="add-room__input"
-              placeholder="e.g 175"
-            />
-          </label>
-        </div>
-      </div>
 
       <Button type="submit" text="Add room" isPrimary />
     </form>

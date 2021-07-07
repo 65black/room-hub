@@ -1,5 +1,8 @@
 .breadcrumbs {
+  align-items: center;
   border-bottom: 1px solid $c-grey90;
+  display: flex;
+  justify-content: space-between;
   padding: $space-16 0;
   margin-bottom: $space-16;
 
