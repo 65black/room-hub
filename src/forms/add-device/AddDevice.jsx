@@ -30,7 +30,10 @@ function AddDevice({ roomId, onSuccess }) {
     );
 
     await transaction.wait();
-    onSuccess();
+
+    setTimeout(() => {
+      onSuccess();
+    }, 1000);
   };
 
   return (

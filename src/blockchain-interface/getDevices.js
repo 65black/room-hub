@@ -1,31 +1,28 @@
-const devices = {
-  'mauna-kea': [
-    {
-      name: 'North',
-      imei: 8828284920482,
-      address: '',
-    },
-    {
-      name: 'East',
-      imei: 8828284920890,
-      address: '',
-    },
-    {
-      name: 'South',
-      imei: 8828284920100,
-      address: '',
-    },
-    {
-      name: 'West',
-      imei: 8828284920433,
-      address: '',
-    },
-  ],
-};
+async function getDevices(roomId, contract) {
+  let roomDevices = [];
 
-function getDevices(roomId = 'mauna-kea') {
-  // TODO: Read devices from contract
-  return devices[roomId] || [];
+  const roomDevicesCount = (await contract.getRoomDevicesCount(roomId)).toNumber();
+  if (roomDevicesCount > 0) {
+    let devicesAddresses = [];
+    for (let i = 0; i < roomDevicesCount; i += 1) {
+      devicesAddresses.push(contract.getRoomDeviceIdAtIndex(roomId, i));
+    }
+
+    devicesAddresses = await Promise.all(devicesAddresses);
+
+    for (let i = 0; i < devicesAddresses.length; i += 1) {
+      const deviceAddress = devicesAddresses[i];
+      roomDevices.push(contract.devices(deviceAddress));
+    }
+
+    roomDevices = (await Promise.all(roomDevices)).map((device) => ({
+      id: device.deviceAddress,
+      name: device.name,
+      imei: device.imei,
+    }));
+  }
+
+  return roomDevices;
 }
 
 export default getDevices;

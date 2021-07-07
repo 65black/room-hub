@@ -6,12 +6,17 @@ import Button from '../../button/Button';
 
 import './NoThreshold.scss';
 
-function NoThreshold() {
+function NoThreshold({ fetchRoomData }) {
   const { roomId } = useParams();
   const { showModal, hideModal } = useModalContext();
 
   const handleConfigureThreshold = () => {
-    showModal(<ConfigureThreshold roomId={roomId} onSubmit={() => hideModal()} />);
+    const onSuccess = () => {
+      hideModal();
+      fetchRoomData();
+    };
+
+    showModal(<ConfigureThreshold roomId={roomId} onSuccess={onSuccess} />);
   };
 
   return (

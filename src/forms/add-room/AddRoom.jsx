@@ -13,8 +13,12 @@ function AddRoom({ onSuccess }) {
     const roomId = roomName.toLowerCase().split(' ').join('-');
     const timeStampAdded = new Date().toUTCString();
 
-    await contract.addRoom(roomId, roomName, timeStampAdded);
-    onSuccess();
+    const transaction = await contract.addRoom(roomId, roomName, timeStampAdded);
+    await transaction.wait();
+
+    setTimeout(() => {
+      onSuccess();
+    }, 1000);
   };
 
   return (

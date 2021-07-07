@@ -1,5 +1,7 @@
 import { useEffect, useReducer } from 'react';
 
+import getDevices from './getDevices';
+
 const UPDATE_ACTION = 'UPDATE';
 const initialRoomsState = {
   room: null,
@@ -20,37 +22,10 @@ function roomsReducer(state = initialRoomsState, action) {
   }
 }
 
-const fetchDevices = async (roomId, contract) => {
-  let roomDevices = [];
-
-  const roomDevicesCount = (await contract.getRoomDevicesCount(roomId)).toNumber();
-  if (roomDevicesCount > 0) {
-    let devicesAddresses = [];
-    for (let i = 0; i < roomDevicesCount; i += 1) {
-      devicesAddresses.push(contract.getRoomDeviceIdAtIndex(roomId, i));
-    }
-
-    devicesAddresses = await Promise.all(devicesAddresses);
-
-    for (let i = 0; i < devicesAddresses.length; i += 1) {
-      const deviceAddress = devicesAddresses[i];
-      roomDevices.push(contract.devices(deviceAddress));
-    }
-
-    roomDevices = (await Promise.all(roomDevices)).map((device) => ({
-      id: device.id,
-      name: device.name,
-      imei: device.imei,
-    }));
-  }
-
-  return roomDevices;
-};
-
 function useRoom({ roomId, contract }) {
   const [roomState, dispatch] = useReducer(roomsReducer, initialRoomsState);
 
-  useEffect(async () => {
+  const fetchRoomData = async () => {
     try {
       dispatch({
         type: UPDATE_ACTION,
@@ -60,9 +35,7 @@ function useRoom({ roomId, contract }) {
 
       const roomInfoResponse = await contract.rooms(roomId);
       const roomThresholdResponse = await contract.roomThresholds(roomId);
-      const roomDevices = await fetchDevices(roomId, contract);
-
-      console.log(roomThresholdResponse);
+      const roomDevices = await getDevices(roomId, contract);
 
       const hasValidThreshold = roomThresholdResponse.every((val) => val.length);
 
@@ -87,9 +60,7 @@ function useRoom({ roomId, contract }) {
         devices: roomDevices, // TODO fetch devices
         logs: [], // TODO fetch logs
       };
-      console.log(roomInfo);
 
-      window.r = roomInfo;
       dispatch({
         type: UPDATE_ACTION,
         field: 'room',
@@ -108,9 +79,13 @@ function useRoom({ roomId, contract }) {
         data: false,
       });
     }
+  };
+
+  useEffect(async () => {
+    fetchRoomData();
   }, []);
 
-  return roomState;
+  return [roomState, fetchRoomData];
 }
 
 export default useRoom;

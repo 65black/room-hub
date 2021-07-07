@@ -4,7 +4,7 @@ import { useAuth } from '../../components/route-guards/RouteGuards';
 
 import './ConfigureThreshold.scss';
 
-function ConfigureThreshold({ roomId, onSubmit }) {
+function ConfigureThreshold({ roomId, onSuccess }) {
   const [formState, setFormState] = useState({
     lowerTemperature: '',
     higherTemperature: '',
@@ -25,7 +25,7 @@ function ConfigureThreshold({ roomId, onSubmit }) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    await contract.addRoomThreshold(
+    const transaction = await contract.addRoomThreshold(
       roomId,
       formState.higherTemperature,
       formState.lowerTemperature,
@@ -35,7 +35,11 @@ function ConfigureThreshold({ roomId, onSubmit }) {
       formState.lowerPressure,
     );
 
-    onSubmit();
+    await transaction.wait();
+
+    setTimeout(() => {
+      onSuccess();
+    }, 1000);
   };
 
   return (

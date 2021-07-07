@@ -17,8 +17,10 @@ import { useAuth } from '../../components/route-guards/RouteGuards';
 function Room() {
   const { contract } = useAuth();
   const { roomId } = useParams();
-  const { isLoading, room } = useRoom({ roomId, contract });
+  const [roomState, fetchRoomData] = useRoom({ roomId, contract });
   const { isDesktop } = useIsDesktop();
+
+  const { isLoading, room } = roomState;
 
   if (isLoading) return <p>loading...</p>;
 
@@ -58,10 +60,10 @@ function Room() {
         <Route path="/:roomId" exact>
           <div className="room">
             <RoomInfo room={room} latestLog={room.logs[0]} />
-            <ConfiguredThreshold threshold={room.threshold} />
-            {!isDesktop ? <Devices devices={room.devices} /> : null}
+            <ConfiguredThreshold threshold={room.threshold} fetchRoomData={fetchRoomData} />
+            {!isDesktop ? <Devices devices={room.devices} fetchRoomData={fetchRoomData} /> : null}
             {renderedCharts}
-            {isDesktop ? <Devices devices={room.devices} /> : null}
+            {isDesktop ? <Devices devices={room.devices} fetchRoomData={fetchRoomData} /> : null}
           </div>
         </Route>
 

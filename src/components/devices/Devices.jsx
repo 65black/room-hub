@@ -9,12 +9,17 @@ import { useModalContext } from '../../state/contexts/modalContext';
 import './Devices.scss';
 import Button from '../button/Button';
 
-function Devices({ devices }) {
+function Devices({ devices, fetchRoomData }) {
   const { roomId } = useParams();
   const { showModal, hideModal } = useModalContext();
 
   const handleAddDevice = () => {
-    showModal(<AddDevice roomId={roomId} onSuccess={hideModal} />);
+    const onSuccess = () => {
+      hideModal();
+      fetchRoomData();
+    };
+
+    showModal(<AddDevice roomId={roomId} onSuccess={onSuccess} />);
   };
 
   const renderDevices = devices.length ? (

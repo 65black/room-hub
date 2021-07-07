@@ -1,4 +1,5 @@
 import { useEffect, useReducer } from 'react';
+import getRooms from './getRooms';
 
 const UPDATE_ACTION = 'UPDATE';
 const initialRoomsState = {
@@ -23,7 +24,7 @@ function roomsReducer(state = initialRoomsState, action) {
 function useRooms({ contract }) {
   const [roomsState, dispatch] = useReducer(roomsReducer, initialRoomsState);
 
-  useEffect(async () => {
+  const fetchRooms = async () => {
     try {
       dispatch({
         type: UPDATE_ACTION,
@@ -31,34 +32,13 @@ function useRooms({ contract }) {
         data: true,
       });
 
-      const userRoomsCount = (await contract.getRoomsCount()).toNumber();
-      if (userRoomsCount > 0) {
-        let roomIds = [];
-        for (let i = 0; i < userRoomsCount; i += 1) {
-          roomIds.push(contract.getRoomIdAtIndex(i));
-        }
+      const rooms = await getRooms(contract);
 
-        roomIds = await Promise.all(roomIds);
-
-        let userRooms = [];
-        for (let i = 0; i < roomIds.length; i += 1) {
-          const roomId = roomIds[i];
-          userRooms.push(contract.rooms(roomId));
-        }
-
-        userRooms = (await Promise.all(userRooms)).map((room) => ({
-          id: room.id,
-          name: room.name,
-          timestampAdded: room.timestampAdded,
-        }));
-
-        window.r = userRooms;
-        dispatch({
-          type: UPDATE_ACTION,
-          field: 'rooms',
-          data: userRooms,
-        });
-      }
+      dispatch({
+        type: UPDATE_ACTION,
+        field: 'rooms',
+        data: rooms,
+      });
     } catch (error) {
       dispatch({
         type: UPDATE_ACTION,
@@ -72,9 +52,13 @@ function useRooms({ contract }) {
         data: false,
       });
     }
+  };
+
+  useEffect(() => {
+    fetchRooms();
   }, []);
 
-  return roomsState;
+  return [roomsState, fetchRooms];
 }
 
 export default useRooms;

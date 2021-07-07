@@ -30,7 +30,6 @@ function useProvideAuth() {
 
       setContract(_contract);
 
-      console.log(_contract);
       const _isRegistered = await _contract.isRegistered();
       if (!_isRegistered) {
         await _contract.registerUser();

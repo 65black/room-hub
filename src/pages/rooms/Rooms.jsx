@@ -12,11 +12,18 @@ import './Rooms.scss';
 
 function Rooms() {
   const { contract } = useAuth();
-  const { isLoading, rooms } = useRooms({ contract });
+  const [roomsState, fetchRooms] = useRooms({ contract });
   const { showModal, hideModal } = useModalContext();
 
+  const { isLoading, rooms } = roomsState;
+
   const handleAddRoom = () => {
-    const modalContent = <AddRoom onSuccess={hideModal} />;
+    const onSuccess = () => {
+      hideModal();
+      fetchRooms();
+    };
+
+    const modalContent = <AddRoom onSuccess={onSuccess} />;
     showModal(modalContent);
   };
 

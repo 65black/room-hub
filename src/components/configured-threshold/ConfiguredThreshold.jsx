@@ -6,7 +6,7 @@ import NoThreshold from './no-threshold/NoThreshold';
 
 import './ConfiguredThreshold.scss';
 
-function ConfiguredThreshold({ threshold }) {
+function ConfiguredThreshold({ threshold, fetchRoomData }) {
   const renderThresholdLimits = threshold ? (
     Object.entries(threshold).map(([limitId, limit]) => {
       return (
@@ -17,7 +17,7 @@ function ConfiguredThreshold({ threshold }) {
       );
     })
   ) : (
-    <NoThreshold />
+    <NoThreshold fetchRoomData={fetchRoomData} />
   );
 
   return (
