@@ -7,10 +7,10 @@ import { useModalContext } from '../../state/contexts/modalContext';
 import './NoRoom.scss';
 
 function NoRoom() {
-  const { showModal } = useModalContext();
+  const { showModal, hideModal } = useModalContext();
 
   const addRoom = () => {
-    const modalContent = <AddRoom />;
+    const modalContent = <AddRoom onSuccess={() => hideModal()} />;
     showModal(modalContent);
   };
 

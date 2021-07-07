@@ -1,8 +1,15 @@
-.add-room {
+.configure-threshold {
   margin-bottom: $space-16;
 
   &__heading {
     @include heading;
+  }
+
+  &__threshold-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: $space-16;
   }
 
   &__input {

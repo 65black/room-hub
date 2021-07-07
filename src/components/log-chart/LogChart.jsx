@@ -28,8 +28,12 @@ function LogChart({ name, log, color, yAxisUnit, thresholds }) {
           <Tooltip content={CustomChartTooltip} />
           <Legend />
 
-          <ReferenceLine y={thresholds.upper[name]} stroke="#ebecee" />
-          <ReferenceLine y={thresholds.lower[name]} stroke="#ebecee" />
+          {thresholds && (
+            <>
+              <ReferenceLine y={thresholds.upper[name]} stroke="#ebecee" />
+              <ReferenceLine y={thresholds.lower[name]} stroke="#ebecee" />
+            </>
+          )}
 
           <Line type="monotone" dataKey={name} stroke={color} />
         </LineChart>

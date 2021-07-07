@@ -17,7 +17,7 @@ function Log({ logs }) {
       statusText = `${logData}mmHg`;
     } else if (logId === 'humidity') {
       statusIcon = <RaindropsIcon className="log__status-icon" />;
-      statusText = `${logData}% humidity`;
+      statusText = `${logData}%`;
     }
 
     return (

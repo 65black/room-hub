@@ -16,7 +16,7 @@ function Actions() {
   const { notifications, removeNotification } = useNotificationContext();
   const { modalState, hideModal } = useModalContext();
 
-  const closeToasterText = 'Ok'
+  const closeToasterText = 'Ok';
 
   function closeToaster(id) {
     removeNotification(id);
@@ -43,10 +43,10 @@ function Actions() {
   ) : null;
 
   return (
-    <Fragment>
+    <>
       {displayToast}
       {displayModal}
-    </Fragment>
+    </>
   );
 }
 

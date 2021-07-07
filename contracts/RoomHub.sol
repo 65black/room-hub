@@ -80,6 +80,19 @@ contract RoomHub {
     return _isOwner;
   }
 
+  function isRegistered() public view returns (bool _isRegistered) {
+    _isRegistered = users[msg.sender].isAdded;
+    return _isRegistered;
+  }
+
+  function registerUser() public {
+    users[msg.sender] = User(
+      msg.sender,
+      true,
+      new string[](0)
+    );
+  }
+
   function addRoomThreshold(
     string memory _roomId,
     string memory _temperatureUpper,
@@ -150,6 +163,25 @@ contract RoomHub {
 
   function getRoomsCount() registeredUser public view returns (uint _roomsCount) {
     return users[msg.sender].roomIds.length;
+  }
+
+  function getRoomIdAtIndex(
+    uint _index
+  ) registeredUser public view returns (string memory _roomId) {
+    return users[msg.sender].roomIds[_index];
+  }
+
+  function getRoomDevicesCount(
+    string memory _roomId
+  ) registeredUser public view returns (uint _roomDevicesCount) {
+    return rooms[_roomId].deviceAddresses.length;
+  }
+
+  function getRoomDeviceIdAtIndex(
+    string memory _roomId,
+    uint _deviceIndex
+  ) registeredUser public view returns (address _deviceAddress) {
+    return rooms[_roomId].deviceAddresses[_deviceIndex];
   }
 
   function blockDevice(

@@ -1,62 +1,67 @@
 import { Switch, Route, useParams } from 'react-router-dom';
 
-import getDevices from '../../blockchain-interface/getDevices';
-import getRoomLogs from '../../blockchain-interface/getLogs';
-import getRoom from '../../blockchain-interface/getRoom';
 import prepareLogData from '../../utilities/prepareLogData';
 
 import useIsDesktop from '../../hooks/useIsDesktop';
 
 import ConfiguredThreshold from '../../components/configured-threshold/ConfiguredThreshold';
-import EmptyRoom from '../../components/empty-room/EmptyRoom';
 import Devices from '../../components/devices/Devices';
 import LogChart from '../../components/log-chart/LogChart';
 import RoomInfo from '../../components/room-info/RoomInfo';
 import Logs from '../logs/Logs';
 
 import './Room.scss';
+import useRoom from '../../blockchain-interface/useRoom';
+import { useAuth } from '../../components/route-guards/RouteGuards';
 
 function Room() {
+  const { contract } = useAuth();
   const { roomId } = useParams();
+  const { isLoading, room } = useRoom({ roomId, contract });
   const { isDesktop } = useIsDesktop();
 
-  const room = getRoom(roomId);
-  const devices = getDevices(roomId);
-  const logs = getRoomLogs(roomId);
+  if (isLoading) return <p>loading...</p>;
 
-  if (!logs.length) {
-    return <EmptyRoom devices={devices} />;
-  }
+  // const devices = getDevices(roomId);
+  // const logs = getRoomLogs(roomId);
 
-  const logsData = prepareLogData(logs);
+  if (!room) return <p>no data</p>;
 
-  const renderedCharts = Object.entries(logsData).map(([logId, logData]) => {
-    const logStyling = {
-      color: logId === 'temperature' ? '#fefae0' : logId === 'pressure' ? '#e07a5f' : '#81b29a',
-      yAxisUnit: logId === 'temperature' ? '°C' : logId === 'pressure' ? 'mmHg' : '%',
-    };
+  // if (!room.logs.length) {
+  //   return <EmptyRoom devices={room.devices} />;
+  // }
 
-    return (
-      <LogChart
-        name={logId}
-        key={logId}
-        log={logData}
-        thresholds={room.threshold}
-        {...logStyling}
-      />
-    );
-  });
+  const logsData = prepareLogData(room.logs);
+
+  const renderedCharts = room.logs.length
+    ? Object.entries(logsData).map(([logId, logData]) => {
+        const logStyling = {
+          color: logId === 'temperature' ? '#fefae0' : logId === 'pressure' ? '#e07a5f' : '#81b29a',
+          yAxisUnit: logId === 'temperature' ? '°C' : logId === 'pressure' ? 'mmHg' : '%',
+        };
+
+        return (
+          <LogChart
+            name={logId}
+            key={logId}
+            log={logData}
+            thresholds={room.threshold}
+            {...logStyling}
+          />
+        );
+      })
+    : null;
 
   return (
     <>
       <Switch>
         <Route path="/:roomId" exact>
           <div className="room">
-            <RoomInfo room={room} latestLog={logs[0]} />
+            <RoomInfo room={room} latestLog={room.logs[0]} />
             <ConfiguredThreshold threshold={room.threshold} />
-            {!isDesktop && <Devices devices={devices} />}
+            {!isDesktop ? <Devices devices={room.devices} /> : null}
             {renderedCharts}
-            {isDesktop && <Devices devices={devices} />}
+            {isDesktop ? <Devices devices={room.devices} /> : null}
           </div>
         </Route>
 
