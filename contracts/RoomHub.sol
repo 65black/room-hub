@@ -35,6 +35,7 @@ contract RoomHub {
   mapping(string => RoomThreshold) public roomThresholds;
 
   struct Log {
+    address deviceAddress;
     string id;
     string temperature;
     string pressure;
@@ -275,6 +276,7 @@ contract RoomHub {
     address _deviceAddress = verifyLog(_logString, _r, _s);
 
     Log memory _log = Log(
+      _deviceAddress,
       _id,
       _temperature,
       _pressure,
@@ -290,5 +292,18 @@ contract RoomHub {
 
     Room storage _room = rooms[_roomId];
     return _room.logIds.push(_id) - 1;
+  }
+
+  function getRoomLogsCount(
+    string memory _roomId
+  ) registeredUser public view returns (uint _roomLogsCount) {
+    return rooms[_roomId].logIds.length;
+  }
+
+  function getRoomLogIdAtIndex(
+    string memory _roomId,
+    uint _logIndex
+  ) registeredUser public view returns (string memory _logId) {
+    return rooms[_roomId].logIds[_logIndex];
   }
 }
