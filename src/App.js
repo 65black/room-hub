@@ -7,10 +7,13 @@ import Rooms from './pages/rooms/Rooms';
 import Room from './pages/room/Room';
 
 import { PrivateRoute } from './components/route-guards/RouteGuards';
+// import usePebbleData from './blockchain-interface/usePebbleData';
 
 import './App.scss';
 
 function App() {
+  // usePebbleData();
+
   return (
     <Router>
       <div className="App">

@@ -56,6 +56,16 @@ contract RoomHub {
   mapping(address => Device) public devices;
   mapping(address => string) public deviceAddressesToRoomIds;
 
+
+  event LogAdded(
+    address deviceAddress,
+    string id,
+    string temperature,
+    string pressure,
+    string humidity,
+    string timestamp
+  );
+
   modifier onlyOwner() {
     require(msg.sender == owner, "Only the contract owner can perform this operation");
     _;
@@ -270,8 +280,8 @@ contract RoomHub {
     string memory _timestamp,
     bytes32 _r,
     bytes32 _s
-  ) public returns (uint _deviceAddressIndex) {
-    string memory _logString = "{\"message\":{\"temperature\":{_temperature}\"pressure\":{_pressure}\"humidity\":{_humidity}\"timestamp\":{_timestamp}\"}}";
+  ) public {
+    string memory _logString = "{\"message\":{\"temperature\":{_temperature}\"humidity\":{_humidity}\"pressure\":{_pressuree}\"timestamp\":{_timestamp}\"}}";
 
     address _deviceAddress = verifyLog(_logString, _r, _s);
 
@@ -291,7 +301,16 @@ contract RoomHub {
     string storage _roomId = deviceAddressesToRoomIds[_deviceAddress];
 
     Room storage _room = rooms[_roomId];
-    return _room.logIds.push(_id) - 1;
+    _room.logIds.push(_id);
+
+    emit LogAdded(
+      _deviceAddress,
+      _id,
+      _temperature,
+      _pressure,
+      _humidity,
+      _timestamp
+    );
   }
 
   function getRoomLogsCount(

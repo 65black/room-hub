@@ -1,6 +1,7 @@
 import { useEffect, useReducer } from 'react';
 
 import getDevices from './getDevices';
+import getRoomLogs from './getLogs';
 
 const UPDATE_ACTION = 'UPDATE';
 const initialRoomsState = {
@@ -36,6 +37,9 @@ function useRoom({ roomId, contract }) {
       const roomInfoResponse = await contract.rooms(roomId);
       const roomThresholdResponse = await contract.roomThresholds(roomId);
       const roomDevices = await getDevices(roomId, contract);
+      console.log('here');
+      await getRoomLogs(roomId, contract);
+      console.log('there');
 
       const hasValidThreshold = roomThresholdResponse.every((val) => val.length);
 
