@@ -38,7 +38,7 @@ function useRoom({ roomId, contract }) {
       const roomThresholdResponse = await contract.roomThresholds(roomId);
       const roomDevices = await getDevices(roomId, contract);
       console.log('here');
-      await getRoomLogs(roomId, contract);
+      const roomLogs = await getRoomLogs(roomId, contract);
       console.log('there');
 
       const hasValidThreshold = roomThresholdResponse.every((val) => val.length);
@@ -62,7 +62,7 @@ function useRoom({ roomId, contract }) {
             }
           : null,
         devices: roomDevices, // TODO fetch devices
-        logs: [], // TODO fetch logs
+        logs: roomLogs, // TODO fetch logs
       };
 
       dispatch({
