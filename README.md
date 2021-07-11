@@ -5,6 +5,8 @@ To run a local copy of RoomHub, follow these steps —
 * clone this repo and `cd` into it
 * install all packages by running `yarn install`
 * start the local blockhain copy by running `yarn start-blockchain`
+* copy one of the private keys logged by hardhat
+* open your browser and import the private key in the MetaMask extension
 * deploy the RoomHub contract by running `yarn deploy-contract:local`
 * copy the contract address output from the command line
 * replace the contract address in `src/components/route-guards/RouteGuards.jsx`, line 11
